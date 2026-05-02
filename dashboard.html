@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misti Software - Secure Login</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f5f7; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .login-box { background: white; padding: 40px 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
+        .logo { font-size: 24px; font-weight: bold; color: #ff4d4f; margin-bottom: 5px; }
+        .subtitle { color: #888; font-size: 14px; margin-bottom: 30px; }
+        
+        .form-group { text-align: left; margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; color: #555; font-weight: bold; margin-bottom: 5px; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 14px; }
+        .form-group input:focus { outline: none; border-color: #ff4d4f; }
+        
+        .btn { width: 100%; padding: 12px; background-color: #ff4d4f; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn:hover { background-color: #e60000; }
+        
+        /* OTP Section (શરૂઆતમાં છુપાયેલું રહેશે) */
+        #otpSection { display: none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <div class="logo">Misti Software</div>
+        <div class="subtitle">Authorized Access Only</div>
+
+        <div id="loginSection">
+            <div class="form-group">
+                <label>User ID (યુઝર આઈડી)</label>
+                <input type="text" id="userId" placeholder="Enter your ID">
+            </div>
+            <div class="form-group">
+                <label>Password (પાસવર્ડ)</label>
+                <input type="password" id="userPass" placeholder="Enter Password">
+            </div>
+            <button class="btn" onclick="verifyLogin()">Login & Get OTP</button>
+        </div>
+
+        <div id="otpSection">
+            <div class="form-group">
+                <label>Enter OTP (મોબાઈલ પર આવેલ OTP નાખો)</label>
+                <input type="number" id="otpCode" placeholder="6-digit OTP">
+            </div>
+            <button class="btn" style="background-color: #52c41a;" onclick="verifyOTP()">Verify & Enter</button>
+        </div>
+
+    </div>
+
+    <script>
+        // અત્યારે આ ફક્ત ડેમો માટે છે. ડેટાબેઝ જોડીશું ત્યારે આમાં અસલી સિસ્ટમ લાગશે.
+        function verifyLogin() {
+            let id = document.getElementById('userId').value;
+            let pass = document.getElementById('userPass').value;
+
+            if(id === "" || pass === "") {
+                alert("કૃપા કરીને ID અને Password નાખો!");
+                return;
+            }
+
+            // ડેમો: જો આઈડી પાસવર્ડ નખાઈ જાય, તો OTP વાળું બોક્સ ખોલી નાખો
+            document.getElementById('loginSection').style.display = "none";
+            document.getElementById('otpSection').style.display = "block";
+            alert("તમારા રજીસ્ટર મોબાઈલ નંબર પર OTP મોકલવામાં આવ્યો છે!");
+        }
+
+        function verifyOTP() {
+            let otp = document.getElementById('otpCode').value;
+            if(otp === "") {
+                alert("OTP નાખવો ફરજીયાત છે!");
+                return;
+            }
+            
+            // ડેમો: OTP નખાઈ જાય એટલે ડેશબોર્ડ પર મોકલી દો
+            window.location.href = "dashboard.html";
+        }
+    </script>
+</body>
+</html>
